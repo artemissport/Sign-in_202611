@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026年9月班任務回報表單</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #FF6B35;
+      --primary-dark: #E55A2B;
+      --primary-light: #FFF0EB;
+      --accent: #004E89;
+      --accent-light: #E8F1FA;
+      --bg: #FAFAF7;
+      --surface: #FFFFFF;
+      --text: #1A1A1A;
+      --text-secondary: #6B6B6B;
+      --border: #E2E2DD;
+      --success: #2ECC71;
+      --error: #E74C3C;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+      --radius: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, #FF8C5A 50%, var(--primary-dark) 100%);
+      padding: 48px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 24px;
+      background: var(--bg);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .header h1 {
+      font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      position: relative;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .header p {
+      color: rgba(255,255,255,0.85);
+      margin-top: 8px;
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+
+    /* Form Container */
+    .form-container {
+      max-width: 640px;
+      margin: -20px auto 40px;
+      padding: 0 16px;
+      position: relative;
+    }
+
+    .form-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      padding: 32px 28px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.2s;
+    }
+
+    .form-card:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .form-card.required::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      bottom: 12px;
+      width: 4px;
+      background: var(--primary);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .form-card {
+      position: relative;
+    }
+
+    /* Labels */
+    .field-label {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .field-label .required-star {
+      color: var(--error);
+      font-size: 1.1rem;
+    }
+
+    .field-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      line-height: 1.5;
+      padding: 8px 12px;
+      background: var(--primary-light);
+      border-radius: 8px;
+      border-left: 3px solid var(--primary);
+    }
+
+    /* Inputs */
+    input[type="text"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: 'Noto Sans TC', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+    }
+
+    input.error, textarea.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.1);
+    }
+
+    .error-msg {
+      color: var(--error);
+      font-size: 0.8rem;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .error-msg.show {
+      display: block;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    /* Checkbox Section */
+    .checkbox-group {
+      margin-top: 8px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      margin-bottom: 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+      user-select: none;
+    }
+
+    .checkbox-item:hover {
+      background: var(--bg);
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      background: #fff;
+    }
+
+    .checkbox-item input[type="checkbox"]:checked {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .checkbox-item input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .checkbox-item label {
+      font-size: 0.95rem;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    /* Section Title */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title .emoji {
+      font-size: 1.2rem;
+    }
+
+    .week-badge {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    /* Task Card Images */
+    .task-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .task-image-wrapper {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      background: var(--bg);
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .task-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .task-image-placeholder {
+      text-align: center;
+      color: var(--text-secondary);
+      padding: 20px;
+    }
+
+    .task-image-placeholder .icon {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: 'Noto Sans TC', sans-serif;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 4px 16px rgba(255,107,53,0.3);
+      letter-spacing: 1px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(255,107,53,0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-120px);
+      background: var(--success);
+      color: #fff;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 1000;
+    }
+
+    .toast.error {
+      background: var(--error);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading-overlay.show {
+      display: flex;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .loading-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .loading-title {
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .loading-hint {
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ✅ 新增：成功彈出視窗 (Modal) 的樣式 */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1001;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background: var(--surface);
+      padding: 32px 24px;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 90%;
+      width: 380px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-overlay.show .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .modal-desc {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .modal-btn-primary {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      transition: background 0.2s;
+      box-shadow: 0 4px 12px rgba(255,107,53,0.2);
+    }
+
+    .modal-btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .modal-btn-secondary {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+
+    .modal-btn-secondary:hover {
+      background: var(--bg);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .form-card { padding: 24px 20px; }
+      .header { padding: 36px 16px 48px; }
+      .task-images { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="loading-overlay" id="loading">
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <div class="loading-title">資料已送出，正在確認</div>
+      <div class="loading-hint">請勿重複提交或關閉此頁面</div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-content">
+      <div class="modal-icon">🎉</div>
+      <div class="modal-title">回報成功！</div>
+      <div class="modal-desc">
+        感謝你的努力 💪<br>
+        順便去查看自己累積了多少次任務跟簽到吧～
+      </div>
+      <a href="https://sign-in-search-ver2.vercel.app//" target="_blank" class="modal-btn-primary">前往查詢系統</a>
+      <button class="modal-btn-secondary" onclick="closeSuccessModal()">關閉視窗</button>
+    </div>
+  </div>
+  <div class="modal-overlay" id="pendingModal">
+    <div class="modal-content">
+      <div class="modal-icon">⏳</div>
+      <div class="modal-title">結果待確認</div>
+      <div class="modal-desc">
+        資料已送出，但系統暫時沒有收到確認回覆。<br>
+        請勿重複提交，請先至查詢系統確認。
+      </div>
+      <a href="https://sign-in-search-ver2.vercel.app/" target="_blank" rel="noopener noreferrer" class="modal-btn-primary">前往查詢系統</a>
+      <button class="modal-btn-secondary" onclick="closePendingModal()">我知道了</button>
+    </div>
+  </div>
+
+  <div class="header">
+    <h1>📋 2026年9月班任務回報表單</h1>
+    <p>請依序填寫以下欄位完成今日任務回報</p>
+  </div>
+
+  <div class="form-container">
+    <form id="reportForm" novalidate>
+
+      <div class="form-card">
+        <div class="field-label">
+          1. 學號 <span class="required-star">*</span>
+        </div>
+        <div class="field-desc">
+          請填寫學號前七碼，例如 2201001-3A，請填寫「2201001」
+        </div>
+        <input type="text" id="studentId" maxlength="7" minlength="7"
+               placeholder="請輸入7碼學號" inputmode="numeric" pattern="\d{7}" required>
+        <div class="error-msg" id="studentIdError">請輸入正確的7碼學號（僅限數字）</div>
+      </div>
+
+      <div class="form-card">
+        <div class="field-label">
+          2. 任務日期 <span class="required-star">*</span>
+        </div>
+        <div class="field-desc">
+          年份填寫西元
+        </div>
+        <input type="date" id="taskDate" required>
+      </div>
+
+      <div class="form-card">
+        <div class="field-label">
+          3. 👉 今日已經上傳飲食（至少一餐） <span class="required-star">*</span>
+        </div>
+        <div class="field-desc">
+          未上傳的「不需」選取
+        </div>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="mealUploaded" value="已上傳">
+            <label for="mealUploaded">已上傳</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card" id="addSection">
+        <div class="field-label">
+          4. 🆙 Add加營養 <span class="required-star">*</span>
+        </div>
+        <div class="field-desc">
+          完成的打勾，未完成的「不需」選取
+        </div>
+        <div id="addCurrentWeek"></div>
+        <div class="checkbox-group" id="addCheckboxes"></div>
+      </div>
+
+      <div class="form-card" id="behaviorSection">
+        <div class="field-label">
+          5. 🧬 Behavior調體質 <span class="required-star">*</span>
+        </div>
+        <div class="field-desc">
+          完成的打勾，未完成的「不需」選取
+        </div>
+        <div id="behaviorCurrentWeek"></div>
+        <div class="checkbox-group" id="behaviorCheckboxes"></div>
+      </div>
+
+      <div class="form-card" id="clearSection">
+        <div class="field-label">
+          6. 🧹 Clear輕負擔 <span class="required-star">*</span>
+        </div>
+        <div class="field-desc">
+          完成的打勾，未完成的「不需」選取
+        </div>
+        <div id="clearCurrentWeek"></div>
+        <div class="checkbox-group" id="clearCheckboxes"></div>
+      </div>
+
+      <div class="form-card">
+        <div class="field-label">
+          7. 想跟校長及團隊說的話
+        </div>
+        <textarea id="message" placeholder="在這裡留下你想說的話..."></textarea>
+      </div>
+
+      <div class="form-card">
+        <div class="section-title">
+          <span class="emoji">🃏</span> 本週任務卡
+        </div>
+        <div id="taskCardWeekBadge" class="week-badge"></div>
+        <div class="task-images">
+          <div class="task-image-wrapper" id="taskCard1">
+            <div class="task-image-placeholder">
+              <div class="icon">🖼️</div>
+              <div>任務卡 A</div>
+            </div>
+          </div>
+          <div class="task-image-wrapper" id="taskCard2">
+            <div class="task-image-placeholder">
+              <div class="icon">🖼️</div>
+              <div>任務卡 B</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card" style="border: none; box-shadow: none; background: transparent; padding: 0;">
+        <button type="submit" class="submit-btn" id="submitBtn">
+          送出回報 ✅
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="footer">
+    2026年9月班任務回報系統 © 2026
+  </div>
+
+<script>
+// ====================================================================
+// 📌 設定區
+// ====================================================================
+
+// 🔴 請在這裡貼上你部署後的 Web App URL
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxA4Lipn5Mt8G7-MWraZxmimkkzNTtgLOTs57qmr2b4UFkEMtLZKTbEFJziBdNFnWEk/exec';
+
+// 📅 課程開始日期 (已加上台灣時間早上 9 點的時區設定 +08:00)
+const COURSE_START_DATE = new Date('2026-09-07T09:00:00+08:00');
+
+// 🧧 停課週設定
+// 若有停課，程式會自動把那一週跳過，後面的週數順延
+// ⚠️ 請確保停課日期也加上 T09:00:00+08:00
+const SKIP_WEEKS = [
+  // 這裡可以放入未來的停課日期，例如：
+  // '2026-04-06T09:00:00+08:00', 
+];
+
+// 📋 12週任務資料
+const WEEKLY_TASKS = {
+  1: {
+    add: ['三餐中至少兩餐，吃到一手掌蔬菜'],
+    behavior: ['每餐先吃菜，再吃肉，最後吃飯'],
+    clear: ['一週選 3 天，晚餐把澱粉的位置讓給蔬菜和蛋白質'],
+    cardImage1: 'images/card_a_week1.png',
+    cardImage2: 'images/card_b_week1.png',
+  },
+  2: {
+    add: ['日行 3000 步'],
+    behavior: ['最後一餐跟隔天第一餐間隔 10 小時'],
+    clear: ['飲料選無糖茶、美式咖啡或氣泡水'],
+    cardImage1: 'images/card_a_week2.png',
+    cardImage2: 'images/card_b_week2.png',
+  },
+  3: {
+    add: ['日行 5000 步'],
+    behavior: ['最後一餐跟隔天第一餐間隔 12 小時'],
+    clear: ['外食時優先選滷、燙、煮、蒸、烤的料理'],
+    cardImage1: 'images/card_a_week3.png',
+    cardImage2: 'images/card_b_week3.png',
+  },
+  4: {
+    add: ['每天喝水量達到「體重 × 30cc」'],
+    behavior: ['練習每口食物咀嚼 20～30 下'],
+    clear: ['想吃甜的時候用水果取代甜點'],
+    cardImage1: 'images/card_a_week4.png',
+    cardImage2: 'images/card_b_week4.png',
+  },
+  5: {
+    add: ['三餐中至少有兩餐，吃到一種蛋白質食物'],
+    behavior: ['每餐吃到 8 分飽即停止'],
+    clear: ['這一週完全不站上體重計'],
+    cardImage1: 'images/card_a_week5.png',
+    cardImage2: 'images/card_b_week5.png',
+  },
+  6: {
+    add: ['日行 7000 步'],
+    behavior: ['一週至少 4 天睡滿 7 小時'],
+    clear: ['不吃糖油混合物'],
+    cardImage1: 'images/card_a_week6.png',
+    cardImage2: 'images/card_b_week6.png',
+  },
+  7: {
+    add: ['三餐中至少兩餐，吃到一種天然原型碳水化合物'],
+    behavior: ['超慢跑 10 分鐘'],
+    clear: ['到便利商店時，不主動購買零食飲料'],
+    cardImage1: 'images/card_a_week7.png',
+    cardImage2: 'images/card_b_week7.png',
+  },
+  8: {
+    add: ['吃 10～20 克無調味堅果'],
+    behavior: ['每天超慢跑 10 分鐘'],
+    clear: ['睡前 2 小時不吃東西'],
+    cardImage1: 'images/card_a_week8.png',
+    cardImage2: 'images/card_b_week8.png',
+  },
+  9: {
+    add: ['每天深蹲 30 下'],
+    behavior: ['每天超慢跑20分鐘'],
+    clear: ['睡前 3 小時不吃東西'],
+    cardImage1: 'images/card_a_week9.png',
+    cardImage2: 'images/card_b_week9.png',
+  },
+  10: {
+    add: ['每天喝水至少 2000cc'],
+    behavior: ['每餐飯後站立或走路 10～15 分鐘'],
+    clear: ['睡前 4 小時不吃東西'],
+    cardImage1: 'images/card_a_week10.png',
+    cardImage2: 'images/card_b_week10.png',
+  },
+  11: {
+    add: ['每天深蹲 40 下'],
+    behavior: ['每天起床對著鏡子說：「（自己的名字），你是最棒的。」'],
+    clear: ['想吃甜的時候，用天然水果取代加工甜點'],
+    cardImage1: 'images/card_a_week11.png',
+    cardImage2: 'images/card_b_week11.png',
+  },
+  12: {
+    add: ['每天伸展、放鬆 10 分鐘'],
+    behavior: ['空腹 14 小時'],
+    clear: ['這一週不喝酒精飲料'],
+    cardImage1: 'images/card_a_week12.png',
+    cardImage2: 'images/card_b_week12.png',
+  },
+};
+
+// ====================================================================
+// 🔧 邏輯區
+// ====================================================================
+
+// 計算目前是第幾週 (含停課邏輯，以台灣時間每週一早上9點切換)
+function getCurrentWeek() {
+  const now = new Date();
+  
+  // 1. 先算出原始週數 (直接計算毫秒差，避免跨時區產生的天數誤差)
+  const diffTime = now.getTime() - COURSE_START_DATE.getTime();
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  let week = Math.floor(diffDays / 7) + 1;
+
+  // 2. 扣除已過的停課週
+  SKIP_WEEKS.forEach(dateStr => {
+    // 停課週的開始時間
+    const skipStartDate = new Date(dateStr);
+    // 停課週的結束時間 (使用毫秒 +7 天，避免瀏覽器 getDate 的日光節約時間雷區)
+    const skipEndDate = new Date(skipStartDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+    // 🛡️ 新增保護機制：只有當停課週在「開學日之後（含）」才需要計算
+    // 這樣就算陣列裡有上個月的舊資料，也不會影響到這次開課的計算
+    if (skipStartDate >= COURSE_START_DATE) {
+      // 如果現在時間已經「超過」了這週，代表這週不算進度，要扣掉
+      if (now >= skipEndDate) {
+        week -= 1;
+      }
+      // 如果現在「正在」這週裡面，週數也要扣掉維持上一週進度
+      else if (now >= skipStartDate && now < skipEndDate) {
+        week -= 1; 
+      }
+    }
+  });
+
+  return Math.max(1, Math.min(12, week));
+}
+
+// 產生 checkbox HTML (累積到當週)
+function generateCheckboxes(containerId, category, currentWeek) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+
+  const allTasks = [];
+  for (let w = 1; w <= currentWeek; w++) {
+    if (WEEKLY_TASKS[w] && WEEKLY_TASKS[w][category]) {
+      WEEKLY_TASKS[w][category].forEach(task => {
+        if (!allTasks.includes(task)) {
+          allTasks.push(task);
+        }
+      });
+    }
+  }
+
+  allTasks.forEach((task, idx) => {
+    const id = `${category}_${idx}`;
+    const item = document.createElement('div');
+    item.className = 'checkbox-item';
+    item.innerHTML = `
+      <input type="checkbox" id="${id}" value="${task}" name="${category}">
+      <label for="${id}">${task}</label>
+    `;
+    container.appendChild(item);
+  });
+}
+
+// 顯示週數 badge
+function showWeekBadge(elementId, week) {
+  const el = document.getElementById(elementId);
+  el.innerHTML = `<span class="week-badge">目前為第 ${week} 週</span>`;
+}
+
+// 載入任務卡圖片
+function loadTaskCards(week) {
+  const badge = document.getElementById('taskCardWeekBadge');
+  badge.textContent = `第 ${week} 週任務卡`;
+
+  const card1 = document.getElementById('taskCard1');
+  const card2 = document.getElementById('taskCard2');
+
+  const weekData = WEEKLY_TASKS[week];
+  if (weekData) {
+    if (weekData.cardImage1) {
+      card1.innerHTML = `<img src="${weekData.cardImage1}" alt="任務卡A - 第${week}週">`;
+    }
+    if (weekData.cardImage2) {
+      card2.innerHTML = `<img src="${weekData.cardImage2}" alt="任務卡B - 第${week}週">`;
+    }
+  }
+}
+
+// 初始化表單
+function initForm() {
+  const currentWeek = getCurrentWeek();
+
+  // 🛡️ 修正時區雷區：確保預設日期為使用者當地的「今天」，而非 UTC 時區
+  const today = new Date();
+  const localDateStr = new Date(today.getTime() - (today.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+  document.getElementById('taskDate').value = localDateStr;
+
+  // 產生各區塊的 checkbox
+  generateCheckboxes('addCheckboxes', 'add', currentWeek);
+  generateCheckboxes('behaviorCheckboxes', 'behavior', currentWeek);
+  generateCheckboxes('clearCheckboxes', 'clear', currentWeek);
+
+  // 顯示週數
+  showWeekBadge('addCurrentWeek', currentWeek);
+  showWeekBadge('behaviorCurrentWeek', currentWeek);
+  showWeekBadge('clearCurrentWeek', currentWeek);
+
+  // 載入任務卡
+  loadTaskCards(currentWeek);
+}
+
+// 學號驗證
+const studentIdInput = document.getElementById('studentId');
+studentIdInput.addEventListener('input', function () {
+  this.value = this.value.replace(/\D/g, '').slice(0, 7);
+  if (this.value.length === 7) {
+    this.classList.remove('error');
+    document.getElementById('studentIdError').classList.remove('show');
+  }
+});
+
+studentIdInput.addEventListener('blur', function () {
+  if (this.value.length !== 7) {
+    this.classList.add('error');
+    document.getElementById('studentIdError').classList.add('show');
+  }
+});
+
+// 取得勾選的 checkbox 值
+function getCheckedValues(name) {
+  const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
+  return Array.from(checked).map(cb => cb.value).join(', ');
+}
+
+// Toast 通知 (保留給錯誤訊息使用)
+function showToast(msg, isError = false) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = isError ? 'toast error show' : 'toast show';
+  setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+// 關閉成功彈窗的函數
+function closeSuccessModal() {
+  document.getElementById('successModal').classList.remove('show');
+}
+function closePendingModal() {
+  document.getElementById('pendingModal').classList.remove('show');
+}
+
+// 格式化時間戳記
+function formatTimestamp() {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  const h = String(now.getHours()).padStart(2, '0');
+  const min = String(now.getMinutes()).padStart(2, '0');
+  const sec = String(now.getSeconds()).padStart(2, '0');
+  return `${y}/${m}/${d} ${h}:${min}:${sec}`;
+}
+
+// 格式化任務日期
+function formatTaskDate(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}/${m}/${day}`;
+}
+
+// 送出表單
+document.getElementById('reportForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  // 驗證學號
+  const studentId = document.getElementById('studentId').value;
+  if (studentId.length !== 7 || !/^\d{7}$/.test(studentId)) {
+    document.getElementById('studentId').classList.add('error');
+    document.getElementById('studentIdError').classList.add('show');
+    document.getElementById('studentId').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  // 驗證日期
+  const taskDate = document.getElementById('taskDate').value;
+  if (!taskDate) {
+    showToast('請選擇任務日期', true);
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  const loading = document.getElementById('loading');
+  btn.disabled = true;
+  loading.classList.add('show');
+
+  // 收集資料
+  const formData = {
+    timestamp: formatTimestamp(),
+    studentId: studentId,
+    message: document.getElementById('message').value || '',
+    taskDate: formatTaskDate(taskDate),
+    mealUploaded: document.getElementById('mealUploaded').checked ? '已上傳' : '',
+    addTasks: getCheckedValues('add'),
+    behaviorTasks: getCheckedValues('behavior'),
+    clearTasks: getCheckedValues('clear'),
+  };
+
+  let keepSubmitDisabled = false;
+
+  try {
+    const params = new URLSearchParams();
+    params.append('data', JSON.stringify(formData));
+
+    let response;
+    let textResponse;
+
+    try {
+      response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        body: params,
+      });
+      textResponse = await response.text();
+    } catch (networkError) {
+      // fetch 拋錯可能是斷線、DNS、CORS 或回應途中中斷。
+      // GAS 仍可能已經完成寫入，所以不能直接說送出失敗。
+      networkError.submissionUncertain = true;
+      throw networkError;
+    }
+
+    if (!response.ok) {
+      const httpError = new Error(`伺服器回應異常（HTTP ${response.status}）`);
+      httpError.submissionUncertain = true;
+      throw httpError;
+    }
+
+    let result;
+    try {
+      result = JSON.parse(textResponse);
+    } catch (parseError) {
+      // GAS 偶爾會回傳空白或 HTML 錯誤頁；此時資料可能已經寫入。
+      console.error('Server 回傳的不是 JSON:', textResponse);
+      parseError.submissionUncertain = true;
+      throw parseError;
+    }
+
+    if (result.result === 'success') {
+      document.getElementById('successModal').classList.add('show');
+
+      document.getElementById('mealUploaded').checked = false;
+      document.querySelectorAll('input[name="add"], input[name="behavior"], input[name="clear"]').forEach(cb => cb.checked = false);
+      document.getElementById('message').value = '';
+    } else {
+      // GAS 明確回傳失敗，代表這是可確認的應用程式錯誤。
+      showToast('❌ 送出失敗：' + (result.message || '未知錯誤'), true);
+    }
+
+  } catch (error) {
+    console.error('Error:', error);
+
+    if (error.submissionUncertain) {
+      keepSubmitDisabled = true;
+      document.getElementById('pendingModal').classList.add('show');
+    } else {
+      showToast('❌ 送出失敗：' + error.message, true);
+    }
+  } finally {
+    // 結果不確定時維持停用，避免同一頁再次提交造成重複資料。
+    if (!keepSubmitDisabled) {
+      btn.disabled = false;
+    }
+    loading.classList.remove('show');
+  }
+});
+
+// 啟動
+initForm();
+</script>
+
+</body>
+</html>
